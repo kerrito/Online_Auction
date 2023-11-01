@@ -1,0 +1,80 @@
+﻿@page
+@model SRC.Pages.UI.UI_feedbackModel
+@{
+}
+<div class="container-fluid paddingzero">
+    <div class="row mb-0 paddingzero">
+        <div class="col-md-12 paddingzero">
+            <img src="~/Image/feedback.jpg" class=" rounded-bottom w-100 imgalignment coverheight" alt="">
+        </div>
+    </div>
+</div>
+
+<div class="continer py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <div class="row">
+                <div class="col-8">
+                    <form  method="POST">
+                        <h2 class="">Feedback</h2>
+                        @{
+                            if (Model.successMessage.Length > 0)
+                            {
+                                <h4 class="text-center text-success">@Model.successMessage</h4>
+                            }
+                            if (Model.errorMessage.Length > 0)
+                            {
+                                <h4 class="text-center text-danger">@Model.errorMessage</h4>
+                            }
+                        }
+                        <p>Give us your valuable feedback so we can make site better</p>
+                        <div class="mt-3">
+                            <div class="row align-items-center">
+                                <div class="col-6 d-flex flex-column">
+                                    <label for="First Name">First Name :</label>
+                                    <input type="text" class="form-control mt-2" placeholder="Enter Your First Name" name="fname" pattern="[A-Za-z ]{3,16}" title="First Name must contain 3 to 16 character no special character allowed" id="" required>
+                                </div>
+                                <div class="col-6 d-flex flex-column">
+                                    <label for="Last Name">Last Name :</label>
+                                    <input type="text" class="form-control mt-2" placeholder="Enter Your Last Name" name="lname" pattern="[A-Za-z ]{3,16}" title="Last Name must contain 3 to 16 character no special character allowed" id="" required>
+                                </div>
+                            </div>
+                            <div class="row align-items-center mt-3">
+                                <div class="col-6 d-flex flex-column">
+                                    <label for="Email">Email :</label>
+                                    <input type="email" class="form-control mt-2" placeholder="Enter Your Email" name="email" pattern="[a-zA-Z]{3}[a-zA-Z0-9._%+-]+@@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}" title="Your email must contain at least 3 alphabetic characters at the beginning and a valid email format" required />
+                                </div>
+                                <div class="col-6 d-flex flex-column">
+                                    <label for="Phone Number">Phone Number :</label>
+                                    <input type="text" class="form-control mt-2" placeholder="Enter Your Phone Number" name="phone" id="" pattern="[0-9]{11}" title="number must contain 11 numbers" required>
+                                </div>
+                            </div>
+                            <div class="col-12 d-flex flex-column">
+                                <label for="Address">Address :</label>
+                                <input type="text" class="form-control mt-2" placeholder="Enter Your Address" name="address" id="" pattern="[A-Za-z0-9,-_ ]{10,200}" title="Address must contain 10 to 200 character No special character other than ,  - _  allowed" required>
+                            </div>
+                            <div class="col-md-12 d-flex flex-column mt-3">
+                                <label for="Feedback">Feedback :</label>
+                                <input name="msg" id="" cols="30" rows="5" class="form-control mt-2" placeholder="Enter Your Message" pattern="[A-Za-z0-9,-_ ]{20,100}" title="Feeedback must contain 20 to 200 character No special character other than ,  - _  allowed" required>
+                            </div>
+                            <div class="col-12">
+                                <div class="row justify-content-center">
+                                    <div class="col-6">
+                                        <input type="submit" class="form-control bg-primary text-light mt-3" value="Submit" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-4 bg-primary text-light rounded pt-2 ps-3">
+                    <h2 class="">Online Auction <i class="fa-solid fa-file-invoice-dollar ms-1"></i></h2>
+                    <p class="mt-3">We are available 27&#47;7. Fell free to contact us any time for any issue related to our services</p>
+                    <p class="mt-5"> Email : abc&commat;gmail.com</p>
+                    <p class="mt-4"> Phone : &plus;9234567890</p>
+                    <p class="mt-4"> Location : Aptech Metro Star Gate Karachi</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

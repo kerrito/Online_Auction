@@ -1,0 +1,155 @@
+﻿@using Microsoft.AspNetCore.Http;
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor accesser;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Online_Auction</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Online_Auction.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/datatables.min.css" asp-append-version="true" />
+    <script src="https://kit.fontawesome.com/9e97330921.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-primary text-light py-3">
+            <div class="container">
+                <a class="navbar-brand text-light h3" asp-area="" asp-page="/Index">Online Auction <i class="fa-solid fa-file-invoice-dollar ms-1"></i></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-page="/Index">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-page="/UI/Auctions">Auctions</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-page="/UI/About">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-page="/UI/Contact">Contact</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-page="/UI/UI-feedback">Feedback</a>
+                        </li>
+                        <li class="nav-item">
+                            <form action="/UI/search" method="GET">
+                                <div class="d-flex align-items-center">
+                                    <div>
+                                        <input type="text" class="form-control py-lg-1 px-lg-5 ms-lg-3 rounded" placeholder="Search Auctions Here" name="id" required>
+                                    </div>
+                                </div>
+                            </form>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav mb-2 mb-lg-0 me-lg-2">
+                        
+                        @{
+                            if (accesser.HttpContext.Session.GetInt32("role") != null && (accesser.HttpContext.Session.GetInt32("role") == 1))
+                            {
+                                <li class="nav-item d-flex flex-row align-items-center ">
+                                    <a class="nav-link text-light hovereffect " asp-page="/dashboard/user/user">Dashboard </a>
+                                </li>
+                            }
+                            else if (accesser.HttpContext.Session.GetInt32("role") != null)
+                            {
+                                <li class="nav-item d-flex flex-row align-items-center ">
+                                    <a class="nav-link text-light hovereffect " asp-page="/user-dashboard/products/product">Dashboard </a>
+                                </li>
+                            }
+                            if (accesser.HttpContext.Session.GetString("login") != null && accesser.HttpContext.Session.GetString("login") == "true")
+                            {
+
+                                <li class="nav-item d-flex flex-row align-items-center ">
+                                    <a class="nav-link text-light hovereffect " asp-page="/auth-user/logout">Logout <i class="fa-solid fa-right-from-bracket ms-1"></i></a>
+                                </li>
+                                <li class="nav-item d-flex flex-row align-items-center ">
+                                    <a class="nav-link text-light hovereffect ">@accesser.HttpContext.Session.GetString("Name") <i class="fa-solid fa-user"></i></a>
+                                </li>
+
+                            }
+                            else
+                            {
+                                <li class="nav-item d-flex flex-row align-items-center ">
+                                    <a class="nav-link text-light hovereffect" asp-page="/auth-user/login">Login</a><span>/</span>
+                                    <a class="nav-link text-light hovereffect" asp-page="/auth-user/register">Register</a>
+                                </li>
+                            }
+                        }
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container-fluid">
+        <main role="main" class="">
+            @RenderBody()
+        </main>
+    </div>
+
+
+    <footer class="">
+        <div class="container-fluid">
+            <div class="row bg-primary text-light pt-5">
+                <div class="col-md-4 ps-4 pt-2">
+                    <h3>Online Auction <i class="fa-solid fa-file-invoice-dollar ms-1"></i></h3>
+                    <p>
+                        Empowering Journeys, Connecting People.Seamless travel
+                        experiences, connecting destinations, one booking at a time,
+                        Your trusted partner for comfortable journeys, where convenience meets quality service.
+                    </p>
+                </div>
+                <div class="col-md-8">
+                    <div class="row">
+                        <div class="col-md-3 pe-sm-0">
+                            <h5>Account</h5>
+                            <p><a asp-page="/Auth-user/register" class="text-decoration-none text-light">Register</a></p>
+                            <p><a asp-page="/Auth-user/login" class="text-decoration-none text-light">Sign In</a></p>
+                            <p><a asp-page="/Auth-user/forget-password" class="text-decoration-none text-light">Forget Password</a></p>
+                        </div>
+                        <div class="col-md-3">
+                            <h5>Pages</h5>
+                            <p><a asp-page="/Index" class="text-decoration-none text-light">Home</a></p>
+                            <p><a asp-page="/UI/About" class="text-decoration-none text-light">About Us</a></p>
+                            <p><a asp-page="/UI/Contact" class="text-decoration-none text-light">Contact Us</a></p>
+                        </div>
+                        <div class="col-md-3">
+                            <h5>Pages</h5>
+                            <p><a asp-page="/UI/UI-Buses" class="text-decoration-none text-light">Buses</a></p>
+                            <p><a asp-page="/UI/UI-feedback" class="text-decoration-none text-light">Feedback</a></p>
+                            <p><a asp-page="/Auth-user/logout" class="text-decoration-none text-light">Sign Out</a></p>
+                        </div>
+                        <div class="col-md-3">
+                            <h5>Policies</h5>
+                            <p><a asp-page="/Privacy" class="text-decoration-none text-light">terms &amp; Condition</a></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12 text-center">
+                    <p>All rights and copyrights &copy; reserved by SRC <i class="fa-solid fa-bus ms-1"></i></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/datatables.min.js"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
+<script>
+    $(document).ready(function () {
+        $('#myTable').DataTable();
+    });
+</script>

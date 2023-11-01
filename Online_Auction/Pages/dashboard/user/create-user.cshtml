@@ -1,0 +1,89 @@
+﻿@page
+@model SRC.Pages.dashboard.user.create_userModel
+@{
+}
+<div class="row">
+    <div class="col-md-2 bg-dark text-light dash_height pt-0 mt-0">
+
+        <div class="bg-primary">
+            <a class="nav-link text-center" asp-page="/dashboard/user/user"><h4 class="text-center text-dark p-1 m-1 mt-2 rounded">Admin Dashboard</h4></a>
+        </div>
+        <div class="mt-3">
+            <a class="nav-link text-light text-center hovereffect " asp-page="/dashboard/user/user"><h5>User</h5> </a>
+        </div>
+        <div class="mt-3">
+            <a class="nav-link text-light text-center hovereffect " asp-page="/dashboard/products/product"><h5>Product</h5> </a>
+        </div>
+        <div class="mt-3">
+            <a class="nav-link text-light text-center hovereffect " asp-page="/dashboard/bid-logs/bid-log"><h5>Biding Logs</h5> </a>
+        </div>
+        <div class="mt-3">
+            <a class="nav-link text-light text-center hovereffect " asp-page="/dashboard/category/categorys"><h5>Categories</h5> </a>
+        </div>
+        <div class="mt-3">
+            <a class="nav-link text-light text-center hovereffect " asp-page="/dashboard/feedbacks/feedback"><h5>Feedback</h5> </a>
+        </div>
+        <div class="mt-3">
+            <a class="nav-link text-light text-center hovereffect" asp-page="/auth-user/logout"><div class="d-flex flex-row align-items-center justify-content-center"><h5>logout</h5> <i class="fa-solid fa-right-from-bracket ms-1"></i></div> </a>
+        </div>
+    </div>
+    <div class="col-md-10">
+        <div class="container py-5">
+            <div class="row justify-content-center">
+                <div class=" col-md-8 col-lg-5">
+                    <form action="" method="POST">
+                        <h2 class="text-center">Create New User Here</h2>
+                        @{
+                            if (Model.errorMessage.Length > 0)
+                            {
+                                <h3 class="text-center text-danger">@Model.errorMessage</h3>
+
+                            }
+                            if (Model.successMessage.Length > 0)
+                            {
+                                <h3 class="text-center text-danger">@Model.successMessage</h3>
+
+                            }
+                        }
+                        <div class="mt-5">
+                            <div class="row align-items-center">
+                                <div class="col-md-6 d-flex flex-column">
+                                    <label for="First Name">First Name :</label>
+                                    <input type="text" class="form-control mt-2" placeholder="Enter Your First Name" name="fname"
+                                           id="" pattern="[A-za-z ]{3,16}" title="First Name must contain 3 to 16 character no special character allowed" required>
+                                </div>
+                                <div class="col-md-6 d-flex flex-column">
+                                    <label for="Last Name">Last Name :</label>
+                                    <input type="text" class="form-control mt-2" placeholder="Enter Your Last Name" name="lname"
+                                           id="" pattern="[A-za-z ]{3,16}" title="Last Name must contain 3 to 16 character no special character allowed" required>
+                                </div>
+                            </div>
+                            <div class="col-12 mt-3 d-flex flex-column">
+                                <label for="Email">Email :</label>
+                                <input type="text" class="form-control mt-2" placeholder="Enter Your Email" name="email" pattern="[a-zA-Z]{3}[a-zA-Z0-9._%+-]+@@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}" title="Your email must contain at least 3 alphabetic characters at the beginning and a valid email format" id="">
+                            </div>
+                            <div class="col-12 mt-3 d-flex flex-column">
+                                <label for="Phone Number">Phone Number :</label>
+                                <input type="tel" class="form-control mt-2" placeholder="Enter Your Phone Number" pattern="[0-9]{11}" title="number must contain 11 numbers" required name="phone"
+                                       id="">
+                            </div>
+                            <div class="col-12 mt-3 d-flex flex-column">
+                                <label for="Password">Password :</label>
+                                <input type="password" class="form-control mt-2" placeholder="Enter Your Password" name="pass" id="" pattern="[A-Za-z0-9]{6,}" title="password must have 6 digits" required>
+                            </div>
+                            <input type="hidden" name="role" value="3" readonly>
+                            <div class="col-12 mt-3 d-flex flex-column">
+                                <label for="Password">Address :</label>
+                                <input type="text" class="form-control mt-2" placeholder="Enter Your Address" name="address" id="" pattern="[A-Za-z0-9,-_ ]{10,200}" title="Address must contain 10 to 200 character No special character other than ,  - _  allowed" required>
+                            </div>
+                            <div class="col-md-12 mt-3">
+                                <input type="submit" class="form-control bg-primary text-light" value="Create User" readonly>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

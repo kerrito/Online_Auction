@@ -1,0 +1,81 @@
+﻿@page
+@model SRC.Pages.dashboard.feedbacks.edit_feedbackModel
+@{
+}
+<div class="row">
+    <div class="col-md-2 bg-dark text-light dash_height pt-0 mt-0">
+
+        <div class="bg-primary">
+            <a class="nav-link text-center" asp-page="/dashboard/user/user"><h4 class="text-center text-dark p-1 m-1 mt-2 rounded">Admin Dashboard</h4></a>
+        </div>
+        <div class="mt-3">
+            <a class="nav-link text-light text-center hovereffect " asp-page="/dashboard/user/user"><h5>User</h5> </a>
+        </div>
+        <div class="mt-3">
+            <a class="nav-link text-light text-center hovereffect " asp-page="/dashboard/products/product"><h5>Product</h5> </a>
+        </div>
+        <div class="mt-3">
+            <a class="nav-link text-light text-center hovereffect " asp-page="/dashboard/bid-logs/bid-log"><h5>Biding Logs</h5> </a>
+        </div>
+        <div class="mt-3">
+            <a class="nav-link text-light text-center hovereffect " asp-page="/dashboard/category/categorys"><h5>Categories</h5> </a>
+        </div>
+        <div class="mt-3">
+            <a class="nav-link text-light text-center hovereffect " asp-page="/dashboard/feedbacks/feedback"><h5>Feedback</h5> </a>
+        </div>
+        <div class="mt-3">
+            <a class="nav-link text-light text-center hovereffect" asp-page="/auth-user/logout"><div class="d-flex flex-row align-items-center justify-content-center"><h5>logout</h5> <i class="fa-solid fa-right-from-bracket ms-1"></i></div> </a>
+        </div>
+    </div>
+    <div class="col-md-10">
+        <div class="continer pt-5 ps-2">
+
+            <div class="row">
+                <div class="col-md-4">
+                    <h3 class="text-canter">Sender Details</h3>
+                    <div class="">
+                        <label for="fname">First Name :</label>
+                        <h5>@Model.feedback.fname</h5>
+                    </div>
+                    <div class="">
+                        <label for="lname">Last Name :</label>
+                        <h5>@Model.feedback.lname</h5>
+                    </div>
+                    <div class="">
+                        <label for="email">Email :</label>
+                        <h5>@Model.feedback.email</h5>
+                    </div>
+                    <div class="">
+                        <label for="phone">Phone Number :</label>
+                        <h5>@Model.feedback.Phone</h5>
+                    </div>
+                    <div class="">
+                        <label for="address">Address :</label>
+                        <h5>@Model.feedback.address</h5>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <h3 class="">Feedback</h3>
+                    <p>@Model.feedback.Message</p>
+                    <div>
+                        @{
+                            if (@Model.feedback.status == 1)
+                            {
+
+                                <form method="POST">
+                                <input type="hidden" value="@Model.feedback.id" name="id">
+                                    <input type="submit" class="form-control bg-primary text-light text-center" value="I Have Read It">
+                                </form>
+                            }
+                            else
+                            {
+                                <input type="button" disabled class="form-control bg-primary text-light text-center" value="Already Read It">
+
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

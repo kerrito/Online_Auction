@@ -1,0 +1,19 @@
+﻿@page
+@using System;
+@using System.Threading;
+@using Microsoft.AspNetCore.Http;
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor accesser;
+@{
+    if (accesser.HttpContext.Session.GetString("login") != null && accesser.HttpContext.Session.GetString("login") == "true")
+    {
+        accesser.HttpContext.Session.Remove("login");
+        accesser.HttpContext.Session.Remove("email");
+        accesser.HttpContext.Session.Remove("id");
+        accesser.HttpContext.Session.Remove("role");
+        Thread.Sleep(3000);
+        Response.Redirect("/Auth-user/login");
+    }else
+    {
+        Response.Redirect("/Auth-user/login");
+    }
+}

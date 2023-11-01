@@ -1,0 +1,61 @@
+﻿@page
+@using System.Data.SqlClient;
+@{
+    bool sessionExists = HttpContext.Session.TryGetValue("login", out byte[] value);
+    if (!sessionExists || HttpContext.Session.GetString("login") == null || HttpContext.Session.GetString("login") != "true")
+    {
+        Response.Redirect("/Auth-user/login");
+    }
+    if (HttpContext.Session.GetInt32("role") != null)
+    {
+        if (HttpContext.Session.GetInt32("role") == 1)
+        {
+
+        }
+        else
+        {
+            Response.Redirect("/user-dashboard/products/product");
+        }
+    }
+    string errorMessage = "";
+    string id = Request.Query["id"];
+    try
+    {
+        string constr = "Data Source=DESKTOP-BJP90HP\\SA;Initial Catalog=online_auction;User ID=sa;Password=123";
+        using (SqlConnection con = new SqlConnection(constr))
+        {
+            con.Open();
+
+            string query = "UPDATE users SET status=2 WHERE id=@id";
+            using (SqlCommand command = new SqlCommand(query, con))
+            {
+                command.Parameters.AddWithValue("@id",id);
+                int rowsAffected = command.ExecuteNonQuery();
+                if (rowsAffected > 0)
+                {
+                    Response.Redirect("/dashboard/user/user");
+                }
+                else
+                {
+                    errorMessage = "Failed to Edit account";
+                    return;
+                }
+
+            }
+        }
+    }
+    catch (SqlException ex)
+    {
+        if (ex.Number == 2601 || ex.Number == 2627)
+        {
+            // Handle duplicate email error
+            errorMessage = "Email address already exists.";
+        }
+        else
+        {
+
+            errorMessage = ex.Message;
+            return;
+        }
+    }
+}

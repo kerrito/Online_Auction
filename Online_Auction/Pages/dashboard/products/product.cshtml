@@ -1,0 +1,116 @@
+﻿@page
+@model SRC.Pages.dashboard.Buses.busModel
+@{
+}
+<div class="row">
+    <div class="col-md-2 bg-dark text-light dash_height pt-0 mt-0">
+
+        <div class="bg-primary">
+            <a class="nav-link text-center" asp-page="/dashboard/user/user"><h4 class="text-center text-dark p-1 m-1 mt-2 rounded">Admin Dashboard</h4></a>
+        </div>
+        <div class="mt-3">
+            <a class="nav-link text-light text-center hovereffect " asp-page="/dashboard/user/user"><h5>User</h5> </a>
+        </div>
+        <div class="mt-3">
+            <a class="nav-link text-light text-center hovereffect " asp-page="/dashboard/products/product"><h5>Product</h5> </a>
+        </div>
+        <div class="mt-3">
+            <a class="nav-link text-light text-center hovereffect " asp-page="/dashboard/bid-logs/bid-log"><h5>Biding Logs</h5> </a>
+        </div>
+        <div class="mt-3">
+            <a class="nav-link text-light text-center hovereffect " asp-page="/dashboard/category/categorys"><h5>Categories</h5> </a>
+        </div>
+        <div class="mt-3">
+            <a class="nav-link text-light text-center hovereffect " asp-page="/dashboard/feedbacks/feedback"><h5>Feedback</h5> </a>
+        </div>
+        <div class="mt-3">
+            <a class="nav-link text-light text-center hovereffect" asp-page="/auth-user/logout"><div class="d-flex flex-row align-items-center justify-content-center"><h5>logout</h5> <i class="fa-solid fa-right-from-bracket ms-1"></i></div> </a>
+        </div>
+    </div>
+    <div class="col-md-10">
+        <div class="container pt-5">
+            <div class="row justify-content-center pt-5">
+                <div class="col-md-12">
+                    <table class="table" id="myTable">
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <h3>Buses table</h3>
+                            </div>
+                            <div>
+                                <a asp-page="/dashboard/products/create-product"><button class="btn btn-primary">Insert Product</button></a>
+
+                            </div>
+                          
+                        </div>
+                        @{
+                            if (Model.errorMessage.Length > 0)
+                            {
+                                <h3 class="text-center text-danger">@Model.errorMessage</h3>
+
+                            }
+                            if (Model.successMessage.Length > 0)
+                            {
+                                <h3 class="text-center text-danger">@Model.successMessage</h3>
+
+                            }
+                        }
+                        <thead>
+                            <tr>
+                                <th scope="col">Title</th>
+                                <th scope="col">Start date</th>
+                                <th scope="col">img</th>
+                                <th scope="col">Description</th>
+                                <th scope="col">End Date</th>
+                                <th scope="col">Start Price</th>
+
+                                <th scope="col">Minimum Increment</th>
+                                <th scope="col">Category</th>
+                                <th scope="col">Sellar</th>
+
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @*style="white-space: nowrap;width:50px !important;text-overflow: ellipsis;overflow: hidden;"*@
+                            @{
+                                foreach (var item in Model.buseslist)
+                                {
+                                    <tr class="align-items-center">
+                                        <th scope="row">@item.name</th>
+                                        <td>@item.start_date</td>
+                                        <td><img src="~/uploads/img/@item.img" class="rounded-circle" width="35px" height="35px"></td>
+                                        <td><p class="hideoverflow">@item.description</p></td>
+                                        <td>@item.end_date</td>
+                                        <td>@item.start_price</td>
+                                        <td>@item.inc_price</td>
+                                        <td >@item.cate</td>
+                                        <td>@item.sell</td>
+                                        @{
+                                            if (item.status == 1)
+                                            {
+
+                                                <td class="tag tag-success">Active</td>
+                                            }
+                                            else
+                                            {
+
+                                                <td class="tag tag-danger">DeActive</td>
+                                            }
+                                        }
+                                        <td class="d-flex mt-1">
+                                            <a href="/dashboard/products/edit-product?id=@item.id" class="me-1"><button class="btn btn-primary">Edit</button></a>
+                                            <a href="/dashboard/products/delete?id=@item.id"><button class="btn btn-danger">Delete</button></a>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

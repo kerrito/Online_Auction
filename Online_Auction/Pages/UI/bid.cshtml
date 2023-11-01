@@ -1,0 +1,151 @@
+﻿@page
+@model Online_Auction.Pages.UI.bidModel
+@{
+}
+<div class="container py-5">
+    <div class="row">
+        <div class="col-md-3 Myscroll">
+            <div class="row">
+                <h2>Other Auctions</h2>
+                    @{
+                        foreach(var item in Model.buseslist)
+                        {
+
+                        <div class="col-md-12">
+                            <a href="/UI/bid?id=@item.id">
+                                <img src="~/uploads/img/@item.img" height="200px" class="form-control">
+                            </a>
+                        </div>
+                        }
+                    }
+            </div>
+        </div>
+        <div class="col-md-6">
+            <h2 class="text-canter">Auction Item</h2>
+            @{
+                if (Model.errorMessage.Length > 0)
+                {
+                    <h3 class="text-center text-danger">@Model.errorMessage</h3>
+
+                }
+                if (Model.successMessage.Length > 0)
+                {
+                    <h3 class="text-center text-danger">@Model.successMessage</h3>
+
+                }
+            }
+            <img src="~/uploads/img/@Model.product.img" class="form-control w-100" height="350px">
+            <h4 class="mt-3">Title : @Model.product.name</h4>
+            <p class="mt-3">Description : @Model.product.description</p>
+            <div class="d-flex align-items-center justify-content-between">
+                <p>Start Price : <span id="least_amount">@Model.product.start_price</span></p>
+                <p>Minimum Increment : <span id="increment">@Model.product.inc_price</span></p>
+            </div>
+            <div class="d-flex align-items-center justify-content-between">
+                <p>Category : @Model.product.cate</p>
+                <p>End Date : @Model.product.end_date</p>
+            </div>
+            <form method="POST" id="first">
+                <input type="hidden" name="id" value="@Model.product.id" readonly>
+                <div class="d-flex align-items-center">
+                    <button type="button" onclick="subtract()" class="btn btn-outline-primary">-</button>
+                    <input class="form-control" name="price" value="@Model.product.start_price" id="amount" readonly>
+                    <button type="button" onclick="add()" class="btn btn-outline-primary">+</button>
+                </div>
+                <div class="d-none text-center" id="error">
+                    <p class="text-danger">Cann't go any lower than that</p>
+                </div>
+                <div class="d-none text-center" id="error2">
+                    <p class="text-danger">New bid Should be greater than the last bid</p>
+                </div>
+                @*@if (DateTime.Parse(Model.product.end_date) >= DateTime.Now)
+                {*@
+                
+
+                    <div class="mt-3">
+                        <input type="button" class="form-control btn btn-primary" onclick="checksubmit()" value="My Bid" readonly>
+                    </div>
+                    @*}else
+                {
+
+                <div class="mt-3">
+                <input type="button" disabled class="form-control btn btn-primary"  value="Bid Has Ended" readonly>
+                </div>
+                }*@
+            </form>
+            
+        </div>
+        <div class="col-md-3">
+            <div class="Myscroll w-100">
+                <div class="row">
+                    <h2>Biding Logs</h2>
+                    @if (Model.last_bid.price != null)
+                    {
+                        <input type="hidden" value="@Model.last_bid.price" id="last_bid_price" readonly>
+
+                    }else
+                    {
+                        <input type="hidden" value="0" id="last_bid_price" readonly>
+
+                    }
+                    @{
+                        int bid_count= 0;
+                        foreach(var item in Model.bid_log)
+                        {
+                            bid_count += 1;
+                            <div class="col-md-12">
+                                <div class="border border-success text-center rounded align-items-center mt-3">
+                                    <p class="p-0 m-2">Current Bid : @item.price</p>
+                                </div>
+                            </div>
+                        }
+                        @if (bid_count == 0)
+                        {
+                            <div class="col-md-12">
+                                <div class="border border-danger text-center rounded align-items-center mt-3">
+                                    <p class="p-0 m-2">No Current Bid</p>
+                                </div>
+                            </div>
+                        }
+                    }
+                    
+                </div>
+            </div>
+         
+        </div>
+    </div>
+</div>
+<script>
+    function add(){
+        var amount = document.getElementById("amount").value
+        var increment = document.getElementById("increment").innerHTML
+        var total = parseInt(amount) + parseInt(increment);
+        document.getElementById("amount").value = total;
+
+        document.getElementById("error").classList.add("d-none");
+
+        document.getElementById("error2").classList.add("d-none");
+    }
+    function subtract() {
+        var amount = document.getElementById("amount").value
+        var increment = document.getElementById("increment").innerHTML
+        var least_amount = document.getElementById("least_amount").innerHTML
+        if (parseInt(amount) > parseInt(least_amount)) {
+            var total = parseInt(amount) - parseInt(increment);
+            document.getElementById("amount").value = total;
+        }else {
+            document.getElementById("error").classList.remove("d-none");
+        }
+    }
+    function checksubmit(){
+
+        var amount = document.getElementById("amount").value
+        var last_bid_amount = document.getElementById("last_bid_price").value
+        if (parseInt(amount) > parseInt(last_bid_amount) && parseInt(amount) != parseInt(last_bid_amount)) {
+            document.getElementById("first").submit();
+        }else {
+
+            document.getElementById("error2").classList.remove("d-none");
+        }
+    }
+</script>

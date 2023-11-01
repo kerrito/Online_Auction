@@ -1,0 +1,73 @@
+﻿@page
+@model Online_Auction.Pages.user_dashboard.bid_logs.bid_logModel
+@{
+}
+<div class="row">
+    <div class="col-md-2 bg-dark text-light dash_height pt-0 mt-0">
+
+        <div class="bg-primary">
+            <a class="nav-link text-center" asp-page="/user-dashboard/products/product"><h4 class="text-center text-dark p-1 m-1 mt-2 rounded">User Dashboard</h4></a>
+        </div>
+        <div class="mt-3">
+            <a class="nav-link text-light text-center hovereffect " asp-page="/user-dashboard/products/product"><h5>Product</h5> </a>
+        </div>
+        <div class="mt-3">
+            <a class="nav-link text-light text-center hovereffect " asp-page="/user-dashboard/bid-logs/bid-log"><h5>biding logs</h5> </a>
+        </div>
+        <div class="mt-3">
+            <a class="nav-link text-light text-center hovereffect" asp-page="/auth-user/logout"><div class="d-flex flex-row align-items-center justify-content-center"><h5>logout</h5> <i class="fa-solid fa-right-from-bracket ms-1"></i></div> </a>
+        </div>
+    </div>
+    <div class="col-md-10">
+        <div class="container pt-5">
+            <div class="row justify-content-center pt-5">
+                <div class="col-md-12">
+                    <table class="table" id="myTable">
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <h3>My Biding Logs table</h3>
+                            </div>
+                        </div>
+
+                        <thead>
+                            <tr>
+                                <th scope="col">Item Name</th>
+                                <th scope="col">Bider Name</th>
+                                <th scope="col">Bided At</th>
+                                <th scope="col">Price</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                foreach (var item in Model.bid_log)
+                                {
+                                    <tr>
+                                        <th scope="row">@item.item_name</th>
+                                        <td>@item.buyer_name</td>
+                                        <td>@item.bought_at</td>
+                                        <td>@item.price</td>
+                                        @{
+                                            if (item.status == 1)
+                                            {
+
+                                                <td class="tag tag-success">Active</td>
+                                            }
+                                            else
+                                            {
+
+                                                <td class="tag tag-danger">DeActive</td>
+                                            }
+                                        }
+                                    </tr>
+                                }
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

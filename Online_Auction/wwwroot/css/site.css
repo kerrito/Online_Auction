@@ -1,0 +1,75 @@
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+html {
+    min-height: 100%;
+}
+
+body {
+}
+
+.hovereffect:hover {
+    opacity: 0.7;
+}
+
+.height {
+    height: 100vh !important;
+}
+
+.pabsolute {
+    position: absolute;
+}
+
+.hideoverflow {
+    white-space: nowrap !important;
+    width: 100px !important;
+    text-overflow: ellipsis !important;
+    overflow: hidden !important;
+}
+
+.paddingzero {
+    padding: 0px !important;
+}
+
+.imgalignment {
+    object-fit: cover !important;
+}
+
+.coverheight {
+    height: 50vh;
+}
+
+.dash_height {
+    height: 160vh;
+}
+.position_relative{
+    position:relative !important;
+}
+.position_absolute{
+    position:absolute !important;
+}
+.position_div{
+    position:center;
+}
+.top_left{
+    position: absolute;
+    top: 8px;
+    left: 16px;
+}
+.Mycontainer {
+    position: relative;
+    height:300px !important;
+}
+.Myscroll {
+    height: 90vh !important;
+    overflow-y: auto !important;
+    scroll-behavior: smooth !important;
+    overflow-x:hidden;
+}

@@ -1,0 +1,120 @@
+﻿@page
+@model Online_Auction.Pages.user_dashboard.products.edit_productModel
+@{
+}
+<div class="row">
+    <div class="col-md-2 bg-dark text-light dash_height pt-0 mt-0">
+
+        <div class="bg-primary">
+            <a class="nav-link text-center" asp-page="/user-dashboard/products/product"><h4 class="text-center text-dark p-1 m-1 mt-2 rounded">User Dashboard</h4></a>
+        </div>
+        <div class="mt-3">
+            <a class="nav-link text-light text-center hovereffect " asp-page="/user-dashboard/products/product"><h5>Product</h5> </a>
+        </div>
+        <div class="mt-3">
+            <a class="nav-link text-light text-center hovereffect " asp-page="/user-dashboard/bid-logs/bid-log"><h5>biding logs</h5> </a>
+        </div>
+        <div class="mt-3">
+            <a class="nav-link text-light text-center hovereffect" asp-page="/auth-user/logout"><div class="d-flex flex-row align-items-center justify-content-center"><h5>logout</h5> <i class="fa-solid fa-right-from-bracket ms-1"></i></div> </a>
+        </div>
+    </div>
+    <div class="col-md-10">
+        <div class="container py-5">
+            <div class="row justify-content-center">
+                <div class=" col-md-8 col-lg-5">
+                    <form action="" method="POST" enctype="multipart/form-data">
+                        <h2 class="text-center">Edit Product Here</h2>
+                        @{
+                            if (Model.errorMessage.Length > 0)
+                            {
+                                <h3 class="text-center text-danger">@Model.errorMessage</h3>
+
+                            }
+                            if (Model.successMessage.Length > 0)
+                            {
+                                <h3 class="text-center text-danger">@Model.successMessage</h3>
+
+                            }
+                        }
+                        <input type="hidden" name="id" value="@Model.product.id" readonly>
+                        <div class="row mt-5">
+                            <div class="row align-items-center">
+                                <div class="col-md-6 d-flex flex-column">
+                                    <label for="Bus Name">Title :</label>
+                                    <input type="text" class="form-control mt-2" value="@Model.product.name" placeholder="Enter Your Product Name" name="name"
+                                           id="" pattern="[A-Za-z0-9-_. ]{3,16}" title="Bus Name must contain 3 to 16 character no special character allowed" required>
+                                </div>
+                                <div class="col-6 mt-3 d-flex flex-column">
+                                    <label for="Product end date">End Date :</label>
+                                    <input type="date" class="form-control mt-2" value="@Model.product.end_date" placeholder="Enter Biding End Date" name="end_date" id="" required>
+                                </div>
+                            </div>
+
+                            <div class="row align-items-center">
+                                <div class="col-12 mt-3 d-flex flex-column">
+                                    <label for="Product Category">Product Category :</label>
+                                    <select name="category" class="form-control mt-2" required>
+                                        <option value="@Model.product.category">@Model.product.cate</option>
+                                        @{
+                                            foreach (var item in Model.category_list)
+                                            {
+                                                <option value="@item.id">@item.name</option>
+                                            }
+                                        }
+                                    </select>
+                                </div>
+                                
+                            </div>
+                            <div class="row align-items-center">
+
+                                <div class="col-6 mt-3 d-flex flex-column">
+                                    <label for="Product Start Amount">Product Start Amount :</label>
+                                    <input type="number" class="form-control mt-2" value="@Model.product.start_price" placeholder="Enter Product Start Amount" name="start_amount" id="" pattern="[0-9]{1,4}" title="Seat Price must contain number between 1 to 9999 " required>
+                                </div>
+
+                                <div class="col-6 mt-3 d-flex flex-column">
+                                    <label for="Product Image">Product Image :</label>
+                                    <input type="file" class="form-control mt-2" placeholder="Enter Product Image Here" name="Imagefile" id="">
+                                </div>
+                            </div>
+                            <div class="row align-items-center">
+                                <div class="col-6 mt-3 d-flex flex-column">
+                                    <label for="Product Increment Amount">Product Increment Amount :</label>
+                                    <input type="number" class="form-control mt-2" value="@Model.product.inc_price" placeholder="Enter Product Minimun Increment Amount" name="inc_amount" id="" pattern="[0-9]{1,4}" title="Seat Price must contain number between 1 to 9999 " required>
+                                </div>
+                                <div class="col-6 mt-3 d-flex flex-column">
+                                    <label for="Product Category">Product Category :</label>
+                                    <select name="status" class="form-control mt-2" required>
+
+                                        @{
+                                            if (Model.product.status == 1)
+                                            {
+                                                <option value="1">Active</option>
+                                                <option value="2">UnActive</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="2">UnActive</option>
+                                                <option value="1">Active</option>
+                                            }
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-12 mt-3 d-flex flex-column">
+                                <label for="Description">Discription :</label>
+                                <input type="text" class="form-control mt-2" value="@Model.product.description" placeholder="Enter Product Description Here" name="desc" id="" pattern="[A-Za-z0-9,-_ ]{10,200}" title="Description must contain 10 to 200 character No special character other than ,  - _  allowed" required>
+                            </div>
+
+                            <div class="col-md-12 mt-3">
+                                <input type="submit" class="form-control bg-primary text-light" value="Create Bus" readonly>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

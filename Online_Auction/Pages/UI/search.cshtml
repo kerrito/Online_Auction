@@ -1,0 +1,72 @@
+﻿@page
+@model Online_Auction.Pages.UI.searchModel
+@{
+}
+<div class="container-fluid paddingzero">
+    <div class="row paddingzero">
+        <div class="col-md-12 paddingzero">
+            <img src="~/Image/search.jpg" class=" rounded-bottom w-100 imgalignment coverheight" alt="">
+        </div>
+    </div>
+</div>
+<div class="container pt-5">
+    <form method="POST">
+        <h2 class="text-center">Fillter Here</h2>
+        <div class="row justify-content-center align-items-center">
+            <div class="col-md-6">
+                <select name="id" class="form-control mt-2" required>
+                    <option value="">Select Product Category</option>
+                    @{
+                        foreach (var item in Model.category_list)
+                        {
+                            <option value="@item.id">@item.name</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="col-md-3">
+                <input type="submit" class="form-control bg-primary text-light hovereffect" value="Search" readonly>
+            </div>
+        </div>
+    </form>
+    
+</div>
+<div class="container py-5">
+    <div class="row py-5">
+        <h2 class="text-center">Current Auctions</h2>
+        @{
+            if (Model.errorMessage.Length > 0)
+            {
+                <h3 class="text-center text-danger">@Model.errorMessage</h3>
+
+            }
+            if (Model.successMessage.Length > 0)
+            {
+                <h3 class="text-center text-danger">@Model.successMessage</h3>
+
+            }
+        }
+        @{
+            int count = 0;
+            foreach (var item in Model.buseslist)
+            {
+                count += 1;
+                <div class="col-md-3 ">
+                    <div class="Mycontainer">
+                        <img src="~/uploads/img/@item.img" class="w-100 imgalignment" height="300px">
+                        <div class="top_left p-2">
+                            <h4 class="">Title : @item.name</h4>
+                            <p class="fw-bold">Description : <span class="text-danger">@item.description</span></p>
+                            <a class="text-decoration-none" href="/UI/bid?id=@item.id"><buttton class="btn btn-primary ">Bid Now</buttton></a>
+                        </div>
+                    </div>
+                </div>
+            }
+            @if (count == 0)
+            {
+                <h3 class="text-center py-5 text-danger">Currently There Is No Auction Related To Your Search</h3>
+            }
+        }
+
+    </div>
+</div>

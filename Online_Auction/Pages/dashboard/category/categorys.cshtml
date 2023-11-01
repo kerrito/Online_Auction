@@ -1,0 +1,113 @@
+﻿@page
+@model Online_Auction.Pages.dashboard.category.categorysModel
+@{
+}
+<div class="row">
+    <div class="col-md-2 bg-dark text-light dash_height pt-0 mt-0">
+
+        <div class="bg-primary">
+            <a class="nav-link text-center" asp-page="/dashboard/user/user"><h4 class="text-center text-dark p-1 m-1 mt-2 rounded">Admin Dashboard</h4></a>
+        </div>
+        <div class="mt-3">
+            <a class="nav-link text-light text-center hovereffect " asp-page="/dashboard/user/user"><h5>User</h5> </a>
+        </div>
+        <div class="mt-3">
+            <a class="nav-link text-light text-center hovereffect " asp-page="/dashboard/products/product"><h5>Product</h5> </a>
+        </div>
+        <div class="mt-3">
+            <a class="nav-link text-light text-center hovereffect " asp-page="/dashboard/bid-logs/bid-log"><h5>Biding Logs</h5> </a>
+        </div>
+        <div class="mt-3">
+            <a class="nav-link text-light text-center hovereffect " asp-page="/dashboard/category/categorys"><h5>Categories</h5> </a>
+        </div>
+        <div class="mt-3">
+            <a class="nav-link text-light text-center hovereffect " asp-page="/dashboard/feedbacks/feedback"><h5>Feedback</h5> </a>
+        </div>
+        <div class="mt-3">
+            <a class="nav-link text-light text-center hovereffect" asp-page="/auth-user/logout"><div class="d-flex flex-row align-items-center justify-content-center"><h5>logout</h5> <i class="fa-solid fa-right-from-bracket ms-1"></i></div> </a>
+        </div>
+    </div>
+    <div class="col-md-10">
+        <div class="container pt-5">
+            <div class="row justify-content-center pt-5">
+                <div class="col-md-6">
+                    <form action="" method="POST">
+                        <h2 class="text-center">Create New Category Here</h2>
+                        @{
+                            if (Model.errorMessage.Length > 0)
+                            {
+                                <h3 class="text-center text-danger">@Model.errorMessage</h3>
+
+                            }
+                            if (Model.successMessage.Length > 0)
+                            {
+                                <h3 class="text-center text-danger">@Model.successMessage</h3>
+
+                            }
+                        }
+                        <div class="row mt-5">
+                            <div class="col-md-12 d-flex flex-column">
+                                <label for="Bus Name">Title :</label>
+                                <input type="text" class="form-control mt-2" placeholder="Enter Your Category Title" name="name"
+                                       id="" pattern="[A-Za-z0-9-_. ]{3,16}" title="Title must contain 3 to 16 character no special character allowed" required>
+                            </div>
+                            <div class="col-md-12 mt-3">
+                                <input type="submit" class="form-control bg-primary text-light" value="Add New Category" readonly>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-6">
+                    <table class="table" id="myTable">
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <h3>Category table</h3>
+                            </div>
+                            <div>
+                                @*<a asp-page="/dashboard/user/create-user"><button class="btn btn-primary">Create User</button></a>
+                                *@
+                                
+                            </div>
+                        </div>
+
+                        <thead>
+                            <tr>
+                                <th scope="col">Title</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                foreach (var item in Model.category_list)
+                                {
+                                    <tr>
+                                        <th scope="row">@item.name</th>
+                                        @{
+                                            if (item.status == 1)
+                                            {
+
+                                                <td class="text-danger">Active</td>
+                                            }
+                                            else
+                                            {
+
+                                                <td class="text-success">UnActive</td>
+                                            }
+                                        }
+                                        <td class="d-flex ">
+                                            <a href="/dashboard/category/edit-categorys?id=@item.id" class="me-1"><button class="btn btn-primary">Edit</button></a>
+                                            <a href="/dashboard/category/delete?id=@item.id"><button class="btn btn-danger">Delete</button></a>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

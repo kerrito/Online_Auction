@@ -1,0 +1,116 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="container-fluid paddingzero w-100">
+    <div class="row paddingzero">
+        <div class="col-md-12 paddingzero">
+            <img src="~/Image/home.webp" class="d-block w-100 imgalignment" style="height:90vh;" alt="...">
+        </div>
+    </div>
+</div>
+<div class="container py-5">
+    <div class="row">
+        <h1 class="text-center mb-5">Current Auctions</h1>
+        @{
+            foreach (var item in Model.buseslist)
+            {
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="~/uploads/img/@item.img" class="card-img-top imgalignment" height="300px" alt="...">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                                <h6>Title : <span>@item.name</span></h6>
+                                <h6>Category : <span class="pe-3">@item.cate</span></h6>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <h6>Start Price : <span>@item.start_price</span></h6>
+                                <h6>Mini Increment : <span class="pe-3">@item.inc_price</span></h6>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <h6>Start Date : <span class="pe-3">@item.start_date</span></h6>
+                                <h6>End Date : <span class="pe-3">@item.end_date</span></h6>
+                            </div>
+                            <div class="d-flex align-items-center justify-content-between pe-3">
+                                <h6>
+                                    Auction : <span class="pe-3">Available</span>
+                                </h6>
+                                <div> <a class="text-decoration-none" href="/UI/bid?id=@item.id"><input type="button" class="form-control bg-primary text-light p-1" value="Bid Now" readonly></a> </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            }
+        }
+
+    </div>
+</div>
+<div class="container py-5">
+    <div class="row">
+        <h1 class="text-center mb-5">OUR GOALS</h1>
+
+        <div class="col-12 mb-3">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <img src="~/Image/homebanner1.jpg" class="rounded w-100 imgalignment" height="400px" alt="Random third slide" alt="" srcset="">
+                </div>
+                <div class="col-md-6">
+                    <h3>Trust and Enjoyment</h3>
+                    <p>
+                        At Online Auction <i class="fa-solid fa-file-invoice-dollar ms-1"></i>, our mission is to redefine the way you travel. We're dedicated to providing you with a seamless and convenient online bus booking experience that takes the hassle out of planning your journeys. Our goal is to offer a comprehensive range of routes, reliable schedules, and comfortable buses to ensure you reach your destination safely and comfortably. With a commitment to transparency, we've crafted clear terms and conditions that outline our booking and cancellation policies, ensuring you're well-informed every step of the way. Join us in our journey towards stress-free travel, where your comfort and convenience are our top priorities.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="row align-items-center">
+                <div class="col-md-6 order-md-1 order-sm-2">
+                    <h3>Empowering Travel</h3>
+                    <p>
+                        Welcome to Online Auction <i class="fa-solid fa-file-invoice-dollar ms-1"></i>, where your journey begins with convenience, reliability, and comfort. Our vision is to create a platform that empowers travelers like you to explore the world without worry. We strive to make bus booking easy, giving you access to a diverse network of routes and schedules. From the moment you step on our buses, you'll experience a commitment to cleanliness, safety, and quality service. Our cancellation policy is designed with your needs in mind, ensuring flexibility and fairness when your plans change. At SRC <i class="fa-solid fa-bus ms-1"></i>, we're not just about getting you from point A to point B – we're about creating a travel experience that you can trust and enjoy.
+                    </p>
+                </div>
+                <div class="col-md-6 order-md-2 order-sm-1">
+                    <img src="~/Image/homebanner2.jpg" class="rounded w-100 imgalignment" height="400px" alt="Random third slide" alt="" srcset="">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container py-5">
+    <div class="row">
+        <h1 class="text-center mb-5">OUR SERVICES</h1>
+        <div class="col-12 mb-3">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <img src="~/Image/homebanner3.jpg" class="rounded w-100 imgalignment" height="400px" alt="Random third slide" alt="" srcset="">
+                </div>
+                <div class="col-md-6">
+
+                    <h3>Service Excellence</h3>
+                    <p>
+                        Discover a New Way to Travel with Online Auction <i class="fa-solid fa-file-invoice-dollar ms-1"></i>. Our comprehensive range of services is designed to make your journey not just a destination, but an experience. With our user-friendly platform, you can effortlessly browse through a wide selection of routes, compare schedules, and book your tickets with just a few clicks. Our commitment to quality extends beyond the booking process – step aboard our modern and comfortable buses that are equipped to provide you with a smooth and enjoyable ride. Whether you're a solo traveler, a family on vacation, or a group of friends exploring new horizons, Online Auction <i class="fa-solid fa-file-invoice-dollar ms-1"></i> is your partner in convenient and reliable travel.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="row align-items-center">
+                <div class="col-md-6 order-md-1 order-sm-2">
+                    <h3>Safety and Comfort</h3>
+                    <p>
+                        Experience Travel Reimagined with Online Auction <i class="fa-solid fa-file-invoice-dollar ms-1"></i>. Our suite of services is tailored to cater to your travel needs and preferences. From flexible booking options that let you plan your journey on your terms to a wide array of route choices connecting popular destinations, we are dedicated to bringing you a seamless travel experience. Our commitment to safety and cleanliness ensures that every ride with us is not just a commute, but an adventure worth cherishing. Let Online Auction <i class="fa-solid fa-file-invoice-dollar ms-1"></i> be your companion on the road to exploration, comfort, and memories that last a lifetime.
+                    </p>
+                </div>
+                <div class="col-md-6 order-md-2 order-sm-1">
+                    <img src="~/Image/homebanner4.jpg" class="rounded w-100 imgalignment" height="400px" alt="Random third slide" alt="" srcset="">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

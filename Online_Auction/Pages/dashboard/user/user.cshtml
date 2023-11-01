@@ -1,0 +1,102 @@
+﻿@page "/dashboard/user/user"
+@model SRC.Pages.dashboard.user.userModel
+@{
+}
+<div class="row">
+    <div class="col-md-2 bg-dark text-light dash_height pt-0 mt-0">
+
+        <div class="bg-primary">
+            <a class="nav-link text-center" asp-page="/dashboard/user/user"><h4 class="text-center text-dark p-1 m-1 mt-2 rounded">Admin Dashboard</h4></a>
+        </div>
+        <div class="mt-3">
+            <a class="nav-link text-light text-center hovereffect " asp-page="/dashboard/user/user"><h5>User</h5> </a>
+        </div>
+        <div class="mt-3">
+            <a class="nav-link text-light text-center hovereffect " asp-page="/dashboard/products/product"><h5>Product</h5> </a>
+        </div>
+        <div class="mt-3">
+            <a class="nav-link text-light text-center hovereffect " asp-page="/dashboard/bid-logs/bid-log"><h5>Biding Logs</h5> </a>
+        </div>
+        <div class="mt-3">
+            <a class="nav-link text-light text-center hovereffect " asp-page="/dashboard/category/categorys"><h5>Categories</h5> </a>
+        </div>
+        <div class="mt-3">
+            <a class="nav-link text-light text-center hovereffect " asp-page="/dashboard/feedbacks/feedback"><h5>Feedback</h5> </a>
+        </div>
+        <div class="mt-3">
+            <a class="nav-link text-light text-center hovereffect" asp-page="/auth-user/logout"><div class="d-flex flex-row align-items-center justify-content-center"><h5>logout</h5> <i class="fa-solid fa-right-from-bracket ms-1"></i></div> </a>
+        </div>
+    </div>
+    <div class="col-md-10">
+        <div class="container pt-5">
+            <div class="row justify-content-center pt-5">
+                <div class="col-md-12">
+                    <table class="table" id="myTable">
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <h3>Users table</h3>
+                            </div>
+                            <div>
+                                <a asp-page="/dashboard/user/create-user"><button class="btn btn-primary">Create User</button></a>
+                                
+                            </div>
+                        </div>
+
+                        <thead>
+                            <tr>
+                                <th scope="col">First Name</th>
+                                <th scope="col">Last Name</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Phone</th>
+                                <th scope="col">Address</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                foreach (var item in Model.userlist)
+                                {
+                                    <tr>
+                                        <th scope="row">@item.FirstName</th>
+                                        <td>@item.LastName</td>
+                                        <td>@item.Email</td>
+                                        <td>@item.Phone</td>
+                                        <td>@item.address</td>
+                                        @{
+                                                if (item.status == 1)
+                                                {
+
+                                                <td class="tag tag-success">Active</td>
+                                                } else 
+                                                {
+
+                                                <td class="tag tag-danger">DeActive</td>
+                                                }
+                                        }
+                                            <td class="d-flex mt-3">
+                                            <a href="/dashboard/user/edit-user?id=@item.Id" class="me-1"><button class="btn btn-primary">Edit</button></a>
+                                            @{
+                                                if (@item.status == 1)
+                                                {
+                                                    <a href="/dashboard/user/delete?id=@item.Id"><button class="btn btn-danger">Delete</button></a>
+
+                                                }else
+                                                {
+                                                    <a ><button disabled class="btn btn-danger">Delete</button></a>
+
+                                                }
+                                            }
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>
